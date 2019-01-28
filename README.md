@@ -35,3 +35,15 @@ For CPU tensorflow install
 
 ### Install Keras
 Keras install manual : https://keras.io/#installation
+
+From your virtual env
+`pip install keras`
+
+## Setup Prednet
+
+Install packages
+`pip install requests bs4 imageio scipy hickle`
+
+Download data
+`cd prednet_dir`
+`py process_kitti.py` or faster, `sh download_data.sh` or download directly from https://www.dropbox.com/s/rpwlnn6j39jjme4/kitti_data.zip?dl=0
