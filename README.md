@@ -56,10 +56,14 @@ Install packages
 Install python2.7 and make a virtual env
 Install old hickle
 `pip install hickle==3.2.1`
-run reformat_data.py 
-Go back to python3
-`pip install hickle==3.3.2`
+`cd fix_prednet_data`
+`py hkl_py_py2.py`
 
+Go back to python3 venv
+`pip install hickle==3.3.2`
+`py hkl_py2_py3.py`
+
+change hkl read names in approprite files, eg in kitti_evaluate.py `X_test.hkl` -> `X_test_36.hkl`
 
 (ref: https://stackoverflow.com/questions/51413618/loading-hickle-filecomes-from-python2-in-python-3
 https://github.com/telegraphic/hickle)
