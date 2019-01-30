@@ -3,10 +3,10 @@ import pickle
 from random import randint
 from tkinter import *
 
-mode = 'normal' # 'normal' or 'glider'
+mode = 'glider' # 'normal' or 'glider'
 
 T = 10 #num of steps in each episode
-N = 100 #num of episodes
+N = 10 #num of episodes
 
 COLS, ROWS = [20, 20]
 CW = 20
@@ -53,7 +53,7 @@ for i in range(N):
   if mode == 'normal':
     for y in range(0, ROWS): # init stage randomly
         data.append([(randint(0, 9) == 0) for x in range(0, COLS)])
-  if mode == 'glinder':
+  if mode == 'glider':
     for y in range(0, ROWS): # init stage all zero
         data.append([(False) for x in range(0, COLS)])
   data[1][2] = True
@@ -68,10 +68,11 @@ d = list()
 d.append(s_all)
 d.append(t_all)
 
+
 if mode == 'normal':
   with open('lifegame_data.pickle', 'wb') as f:
       pickle.dump(d, f)
-if mode == 'glinder':
+if mode == 'glider':
   with open('lifegame_data_glider.pickle', 'wb') as f:
       pickle.dump(d, f)
 
