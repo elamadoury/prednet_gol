@@ -78,3 +78,18 @@ The file
 ## Test
 
 run the model `py kitti_evaluate.py`
+
+### GPU setup (Windows)
+
+References: 
+https://www.tensorflow.org/install/pip
+https://www.tensorflow.org/install/gpu
+https://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/
+
+Install tensorflow-gpu 
+`pip install --upgrade tensorflow-gpu`
+
+Install Nvidia drivers. Find your GPU model (https://www.cisco.com/c/en/us/td/docs/telepresence/endpoint/articles/cisco_telepresence_movi_find_out_graphics_card_driver_on_windows_pc_kb_540.html)
+eg NVDIA GeForce RTX 2080 Ti
+Download corresponding driver https://www.nvidia.com/Download/index.aspx?lang=en-us
+Install CUDA toolkit https://developer.nvidia.com/cuda-zone
