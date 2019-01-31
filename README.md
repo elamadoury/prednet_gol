@@ -94,7 +94,7 @@ Install Nvidia drivers. Find your GPU model (https://www.cisco.com/c/en/us/td/do
 eg `NVDIA GeForce RTX 2080 Ti`
 Download and install corresponding driver https://www.nvidia.com/Download/index.aspx?lang=en-us
 Install Visual Studio https://visualstudio.microsoft.com/
-Install CUDA toolkit https://developer.nvidia.com/cuda-zone
+Install CUDA toolkit, *legacy release 9.0* https://developer.nvidia.com/cuda-zone (ref https://github.com/tensorflow/tensorflow/issues/22794)
 Install cudnn https://developer.nvidia.com/cudnn (requires developper account)
 Place cudnn cuda folder in `C:/tools/cuda`
 
@@ -104,3 +104,13 @@ SET PATH=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\extras\CUPTI\l
 SET PATH=C:\tools\cuda\bin;%PATH%` 
 
 Check installation `nvcc -V`
+
+Install or enable (https://docs.microsoft.com/en-us/dotnet/framework/install/dotnet-35-windows-10) .NET 3.5
+Install DirectX https://www.microsoft.com/en-us/download/details.aspx?id=6812
+
+Check that sample runs:
+open `"C:\ProgramData\NVIDIA Corporation\CUDA Samples\v10.0\Samples_vs2017.sln"` with Visual Studio
+If there are `file not found` errors, make sure that you install cuda *after* installing visual studio.
+If there are SDK errors, right-click the solution in the solution explorer and click `retarget solution`
+The compiled file is built at `C:\ProgramData\NVIDIA Corporation\CUDA Samples\v10.0\bin\win64\Release` , run it and check that there are no errors
+
