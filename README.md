@@ -53,6 +53,7 @@ Install packages
 `pip install requests bs4 imageio scipy hickle matplotlib`
 
 ### hkl pickle error:
+In case of error while reading data files
 Install python2.7 and make a virtual env
 Install old hickle
 `pip install hickle==3.2.1`
@@ -90,6 +91,16 @@ Install tensorflow-gpu
 `pip install --upgrade tensorflow-gpu`
 
 Install Nvidia drivers. Find your GPU model (https://www.cisco.com/c/en/us/td/docs/telepresence/endpoint/articles/cisco_telepresence_movi_find_out_graphics_card_driver_on_windows_pc_kb_540.html)
-eg NVDIA GeForce RTX 2080 Ti
-Download corresponding driver https://www.nvidia.com/Download/index.aspx?lang=en-us
+eg `NVDIA GeForce RTX 2080 Ti`
+Download and install corresponding driver https://www.nvidia.com/Download/index.aspx?lang=en-us
+Install Visual Studio https://visualstudio.microsoft.com/
 Install CUDA toolkit https://developer.nvidia.com/cuda-zone
+Install cudnn https://developer.nvidia.com/cudnn (requires developper account)
+Place cudnn cuda folder in `C:/tools/cuda`
+
+Update path to add cuda and cudnn
+`SET PATH=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\bin;%PATH%
+SET PATH=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\extras\CUPTI\libx64;%PATH%
+SET PATH=C:\tools\cuda\bin;%PATH%` 
+
+Check installation `nvcc -V`
