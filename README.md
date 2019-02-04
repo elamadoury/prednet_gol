@@ -94,23 +94,32 @@ Install Nvidia drivers. Find your GPU model (https://www.cisco.com/c/en/us/td/do
 eg `NVDIA GeForce RTX 2080 Ti`
 Download and install corresponding driver https://www.nvidia.com/Download/index.aspx?lang=en-us
 Install Visual Studio https://visualstudio.microsoft.com/
-Install CUDA toolkit, *legacy release 9.0* https://developer.nvidia.com/cuda-zone (ref https://github.com/tensorflow/tensorflow/issues/22794)
+Install CUDA toolkit, *legacy release 9.0* https://developer.nvidia.com/cuda-zone (ref https://github.com/tensorflow/tensorflow/issues/22794), `exe local` (network installer fails if PC inside csl)
 Install cudnn https://developer.nvidia.com/cudnn (requires developper account)
 Place cudnn cuda folder in `C:/tools/cuda`
 
 Update path to add cuda and cudnn
-`SET PATH=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\bin;%PATH%
-SET PATH=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\extras\CUPTI\libx64;%PATH%
+`SET PATH=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.0\bin;%PATH%
+SET PATH=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.0\extras\CUPTI\libx64;%PATH%
 SET PATH=C:\tools\cuda\bin;%PATH%` 
 
 Check installation `nvcc -V`
+
+Check that tensorflow is using gpu: run `py test_gpu.py` from your virtualenv
+
+In case of import tensorflow error, manually remove tensorflow folder in your virtualenv, then uninstall tf and tf-gpu with pip, and reinstall tf-gpu
+
+#### In case of errors, try this
+
+Tensorflow-gpu should run even if the samples below don't run, but if you manage to run the samples, for sure tensorflow should run
 
 Install or enable (https://docs.microsoft.com/en-us/dotnet/framework/install/dotnet-35-windows-10) .NET 3.5
 Install DirectX https://www.microsoft.com/en-us/download/details.aspx?id=6812
 
 Check that sample runs:
-open `"C:\ProgramData\NVIDIA Corporation\CUDA Samples\v10.0\Samples_vs2017.sln"` with Visual Studio
+open `"C:\ProgramData\NVIDIA Corporation\CUDA Samples\v9.0\Samples_vs2017.sln"` with Visual Studio
 If there are `file not found` errors, make sure that you install cuda *after* installing visual studio.
 If there are SDK errors, right-click the solution in the solution explorer and click `retarget solution`
 The compiled file is built at `C:\ProgramData\NVIDIA Corporation\CUDA Samples\v10.0\bin\win64\Release` , run it and check that there are no errors
+
 
