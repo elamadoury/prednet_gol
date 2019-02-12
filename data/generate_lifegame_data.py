@@ -1,15 +1,19 @@
 import numpy as np
 import pickle
-from random import randint
+import random 
 from tkinter import *
+import cv2
+import hickle as hkl
 
-mode = 'glider' # 'normal' or 'glider'
+random.seed(123)
+
+mode = 'normal' # 'normal' or 'glider'
 
 T = 10 #num of steps in each episode
-N = 10 #num of episodes
+N = 2 #num of episodes
 
-COLS, ROWS = [20, 20]
-CW = 20
+COLS, ROWS = [20, 16]
+# COLS, ROWS = [160, 128]
 
 
 def check(x, y):
@@ -33,11 +37,13 @@ def next_turn():
     data = data2
 
 def game_loop():
-    global c
+    global c, epi
     while c < T:
       s_all.append(np.array(data, dtype="int"))
+      sources.append(str(epi))
       if c == T - 1:
         t_all.append(True)
+        epi += 1
       else:
         t_all.append(False)
       next_turn()
@@ -46,21 +52,23 @@ def game_loop():
 
 s_all = list()
 t_all = list()
+epi = 1
+sources = list()
 
 for i in range(N):
   c = 0
   data = [] # stage data
   if mode == 'normal':
     for y in range(0, ROWS): # init stage randomly
-        data.append([(randint(0, 9) == 0) for x in range(0, COLS)])
+        data.append([(random.randint(0, 9) == 0) for x in range(0, COLS)])
   if mode == 'glider':
     for y in range(0, ROWS): # init stage all zero
         data.append([(False) for x in range(0, COLS)])
-  data[1][2] = True
-  data[2][3] = True
-  data[3][1] = True
-  data[3][2] = True
-  data[3][3] = True
+    data[1][2] = True
+    data[2][3] = True
+    data[3][1] = True
+    data[3][2] = True
+    data[3][3] = True
 
   game_loop()
 
@@ -68,16 +76,21 @@ d = list()
 d.append(s_all)
 d.append(t_all)
 
+X = np.array(list(map(lambda x: cv2.cvtColor(x.astype('uint8'), cv2.COLOR_GRAY2RGB).repeat(8, axis=0).repeat(8, axis=1)
+, s_all)))
+X[X == 1] = 255
 
 if mode == 'normal':
   with open('lifegame_data.pickle', 'wb') as f:
       pickle.dump(d, f)
+  hkl.dump(X, 'X_normal.hkl')
+  hkl.dump(sources, 'sources_normal.hkl')
+
 if mode == 'glider':
   with open('lifegame_data_glider.pickle', 'wb') as f:
       pickle.dump(d, f)
-
-
-
+  hkl.dump(X, 'X_glider.hkl')
+  hkl.dump(sources, 'sources_glider.hkl')
 
 
 
