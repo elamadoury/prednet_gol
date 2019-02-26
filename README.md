@@ -52,6 +52,7 @@ From your virtual env
 Install packages
 `pip install requests bs4 imageio scipy hickle matplotlib`
 `pip install numpy==1.16`
+opencv-python
 
 ### hkl pickle error:
 In case of error while reading data files
