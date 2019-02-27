@@ -5,12 +5,12 @@ from tkinter import *
 import cv2
 import hickle as hkl
 
-random.seed(123)
+random.seed(321)
 
-mode = 'normal' # 'normal' or 'glider'
+mode = 'glider' # 'normal' or 'glider'
 
 T = 10 #num of steps in each episode
-N = 2 #num of episodes
+N = 10 #num of episodes
 
 COLS, ROWS = [20, 16]
 # COLS, ROWS = [160, 128]
@@ -28,6 +28,12 @@ def check(x, y):
         if 2 <= cnt <= 3: return True
         return False
     return data[y][x]
+
+def check_glider_move(x, y):
+    if x > 0 and y > 0 and data[y-1][x-1]:
+        return True
+    else:
+        return False
 
 def next_turn():
     global data
@@ -81,16 +87,16 @@ X = np.array(list(map(lambda x: cv2.cvtColor(x.astype('uint8'), cv2.COLOR_GRAY2R
 X[X == 1] = 255
 
 if mode == 'normal':
-  with open('lifegame_data.pickle', 'wb') as f:
+  with open('lifegame_data_test.pickle', 'wb') as f:
       pickle.dump(d, f)
-  hkl.dump(X, 'X_normal.hkl')
-  hkl.dump(sources, 'sources_normal.hkl')
+  # hkl.dump(X, 'X_val.hkl')
+  # hkl.dump(sources, 'sources_val.hkl')
 
 if mode == 'glider':
   with open('lifegame_data_glider.pickle', 'wb') as f:
       pickle.dump(d, f)
-  hkl.dump(X, 'X_glider.hkl')
-  hkl.dump(sources, 'sources_glider.hkl')
+  # hkl.dump(X, 'X_train.hkl')
+  # hkl.dump(sources, 'sources_train.hkl')
 
 
 

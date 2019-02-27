@@ -4,3 +4,7 @@ deep_learning/result
 *.hkl
 chainer_video_generator/
 lana_notes.md
+deep_learning/.ipynb_checkpoints/predict_next_image_lifegame_ae-checkpoint.ipynb
+deep_learning/__pycache__/net_conv.cpython-37.pyc
+figures_for_paper/
+deep_learning/fig_for_paper/
