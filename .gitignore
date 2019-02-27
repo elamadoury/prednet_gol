@@ -2,3 +2,5 @@ fix_prednet_data/fixed_hkl_files.7z
 deep_learning/result
 *.pickle
 *.hkl
+chainer_video_generator/
+lana_notes.md
