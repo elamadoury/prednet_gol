@@ -6,20 +6,21 @@ import chainer.links as L
 
 
 class ConvAE_mini(chainer.Chain):
-    def __init__(self, input_size, n_filters=10, n_latent=20, filter_size=3, activation='relu'):
+    def __init__(self, input_size, input_size2, n_filters=10, n_latent=20, filter_size=3, activation='relu'):
         self.activation = {'relu': F.relu, 'sigmoid': F.sigmoid, 'tanh': F.tanh}[activation]
         self.n_filters = n_filters
         self.n_latent = n_latent
         self.filter_size = filter_size
         self.dim1 = input_size - filter_size + 1
+        self.dim2 = input_size2 - filter_size + 1
         super(ConvAE_mini, self).__init__()
         with self.init_scope():
             # encoder
-            self.conv1 = L.Convolution2D(1, n_filters, filter_size)
-            self.lenc1 = L.Linear(n_filters*self.dim1*self.dim1, n_latent)
+            self.conv1 = L.Convolution2D(1, n_filters, filter_size, pad=1)
+            self.lenc1 = L.Linear(n_filters*self.dim1*self.dim2, n_latent)
             # decoder
-            self.ldec1 = L.Linear(n_latent, n_filters*self.dim1*self.dim1)
-            self.deconv1 = L.Deconvolution2D(n_filters, 1, filter_size)
+            self.ldec1 = L.Linear(n_latent, n_filters*self.dim1*self.dim2)
+            self.deconv1 = L.Deconvolution2D(n_filters, 1, filter_size, pad=1)
             
     def forward(self, x, sigmoid=True):
         return self.decode(self.encode(x), x.data.shape[0], sigmoid)
