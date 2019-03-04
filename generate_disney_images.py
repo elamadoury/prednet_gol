@@ -36,10 +36,15 @@ except:
     os.mkdir(directory) 
 
 print("Start to save images...")
+i = -1
 while True:
+  i += 1
   success, image = vidcap.read()
   if not success:
     break
+  #opencv seems to save duplicate frames
+  if i%2 != 0:
+    continue
   files.append(os.path.join(args.dir, "%s_%05d.jpg" % (args.prefix, count)))
   sys.stdout.write('\rSave {}'.format(files[-1]))
   sys.stdout.flush()

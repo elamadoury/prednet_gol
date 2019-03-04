@@ -41,6 +41,11 @@ For CPU tensorflow install
 `pip install --upgrade tensorflow` (`pip install --upgrade tensorflow-gpu` for gpu)
 
 
+Update path to add cuda and cudnn
+`SET PATH=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.0\bin;%PATH%
+SET PATH=C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.0\extras\CUPTI\libx64;%PATH%
+SET PATH=C:\tools\cuda\bin;%PATH%` 
+
 ### Install Keras
 Keras install manual : https://keras.io/#installation
 

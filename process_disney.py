@@ -11,7 +11,6 @@ from scipy.misc import imresize
 import hickle as hkl
 
 desired_im_sz = (128, 160)
-categories = ['city', 'residential', 'road']
 
 # Processes images and saves them in train, val, test splits.
 def process_data():
@@ -19,10 +18,12 @@ def process_data():
     im_dir = DATA_DIR + "images/"
     split = "test"
     im_list = []
-    #files = list(os.walk(im_dir, topdown=False))[-1][-1]
-    for i in range(30):
-        image_name = "frame_" + str(i).zfill(5)  + ".jpg"
+    source_list = []  # corresponds to recording that image came from
+    #at 254216 very animated sequence
+    for i in range(42290,(42290+50)): 
+        image_name = "frame_" + str(i).zfill(5)  + ".jpg" 
         im_list += [im_dir + image_name]
+        source_list += [im_dir]
 
     print( 'Creating ' + split + ' data: ' + str(len(im_list)) + ' images')
     X = np.zeros((len(im_list),) + desired_im_sz + (3,), np.uint8)
@@ -31,7 +32,7 @@ def process_data():
         X[i] = process_im(im, desired_im_sz)
 
     hkl.dump(X, os.path.join(DATA_DIR, 'X_' + split + '.hkl'))
-    #hkl.dump(source_list, os.path.join(DATA_DIR, 'sources_' + split + '.hkl'))
+    hkl.dump(source_list, os.path.join(DATA_DIR, 'sources_' + split + '.hkl'))
 
 # resize and crop image
 def process_im(im, desired_sz):
