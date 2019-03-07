@@ -7,13 +7,13 @@ import hickle as hkl
 
 random.seed(321)
 
-mode = 'glider' # 'normal' or 'glider'
+mode = 'normal' # 'normal' or 'glider'
 
 T = 10 #num of steps in each episode
 N = 10 #num of episodes
 
-COLS, ROWS = [20, 16]
-# COLS, ROWS = [160, 128]
+# COLS, ROWS = [20, 16]
+COLS, ROWS = [160, 128]
 
 
 def check(x, y):
@@ -82,21 +82,22 @@ d = list()
 d.append(s_all)
 d.append(t_all)
 
-X = np.array(list(map(lambda x: cv2.cvtColor(x.astype('uint8'), cv2.COLOR_GRAY2RGB).repeat(8, axis=0).repeat(8, axis=1)
-, s_all)))
+# X = np.array(list(map(lambda x: cv2.cvtColor(x.astype('uint8'), cv2.COLOR_GRAY2RGB).repeat(8, axis=0).repeat(8, axis=1)
+# , s_all)))
+X = np.array(list(map(lambda x: cv2.cvtColor(x.astype('uint8'), cv2.COLOR_GRAY2RGB), s_all)))
 X[X == 1] = 255
 
 if mode == 'normal':
-  with open('lifegame_data_test.pickle', 'wb') as f:
+  with open('lifegame_data_test_large.pickle', 'wb') as f:
       pickle.dump(d, f)
-  # hkl.dump(X, 'X_val.hkl')
-  # hkl.dump(sources, 'sources_val.hkl')
+  # hkl.dump(X, 'X_test_large.hkl')
+  # hkl.dump(sources, 'sources_test_large.hkl')
 
 if mode == 'glider':
-  with open('lifegame_data_glider.pickle', 'wb') as f:
-      pickle.dump(d, f)
-  # hkl.dump(X, 'X_train.hkl')
-  # hkl.dump(sources, 'sources_train.hkl')
+  # with open('lifegame_data_glider.pickle', 'wb') as f:
+      # pickle.dump(d, f)
+  hkl.dump(X, 'X_test.hkl')
+  hkl.dump(sources, 'sources_test.hkl')
 
 
 
