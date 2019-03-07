@@ -2,8 +2,14 @@ fix_prednet_data/fixed_hkl_files.7z
 deep_learning/result
 *.pickle
 *.hkl
+chainer_video_generator/
+lana_notes.md
 deep_learning/.ipynb_checkpoints/predict_next_image_lifegame_ae-checkpoint.ipynb
 deep_learning/__pycache__/net_conv.cpython-37.pyc
 figures_for_paper/
+<<<<<<< HEAD
 deep_learning/fig_for_paper/
 deep_learning/.ipynb_checkpoints/predict_next_image_lifegame_ae_for_KITTI-checkpoint.ipynb
+=======
+deep_learning/fig_for_paper/
+>>>>>>> 5e84536042159a62cf17e435a4a05f4f5fcba611
