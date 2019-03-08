@@ -129,6 +129,6 @@ If there are `file not found` errors, make sure that you install cuda *after* in
 If there are SDK errors, right-click the solution in the solution explorer and click `retarget solution`
 The compiled file is built at `C:\ProgramData\NVIDIA Corporation\CUDA Samples\v10.0\bin\win64\Release` , run it and check that there are no errors
 
-## Generate disney images
- python INPUT_FILE [--prefix <prefix>] [--dir <directory>] [--help]'.format(__file__)
+## Generate FPSI images
+ python generate_fpsi_images.py INPUT_FILE [--prefix <prefix>] [--dir <directory>] [--help]'.format(__file__)
 
