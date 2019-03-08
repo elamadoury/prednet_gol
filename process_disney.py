@@ -19,8 +19,7 @@ def process_data():
     split = "test"
     im_list = []
     source_list = []  # corresponds to recording that image came from
-    #at 254216 very animated sequence
-    for i in range(42290,(42290+50)): 
+    for i in range(36378,(36378+50)): 
         image_name = "frame_" + str(i).zfill(5)  + ".jpg" 
         im_list += [im_dir + image_name]
         source_list += [im_dir]

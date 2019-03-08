@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #coding:utf-8
-# Code from https://figshare.com/articles/Video_generator_with_Chainer_to_tensorboard/5483710
+# Code modified from https://figshare.com/articles/Video_generator_with_Chainer_to_tensorboard/5483710
 #Paper: ""
 
 import cv2
