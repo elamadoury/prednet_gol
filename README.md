@@ -1,19 +1,15 @@
-# Prednet install:
+# Running Prednet on discrete and continuous datasets
 
-## Reference
+## Reference for Prednet code
 cloned code at https://github.com/coxlab/prednet
 ref https://coxlab.github.io/prednet/
 
-## Installation
-
-Switch python versions: 
-`> python --version
-Python 3.4.2
-> set PATH=C:\tools\python2\;%PATH%
-> python --version
-Python 2.7.9`
+## Prednet Installation
 
 ### Install python, pip and virtualenv according to your OS 
+
+We recommend using python 3.6 or above rather than python 2.
+
 python, pip and virtualenv install manual: https://www.tensorflow.org/install/pip
 
 Example for windows:
@@ -55,12 +51,13 @@ From your virtual env
 ## Setup Prednet
 
 Install packages
-`pip install requests bs4 imageio scipy hickle matplotlib`
+`pip install requests bs4 imageio scipy hickle matplotlib opencv-python`
 `pip install numpy==1.16`
-opencv-python
 
 ### hkl pickle error:
-In case of error while reading data files
+
+In case of error while reading weights files, download files from .... or 
+
 Install python2.7 and make a virtual env
 Install old hickle
 `pip install hickle==3.2.1`
@@ -71,21 +68,41 @@ Go back to python3 venv
 `pip install hickle==3.3.2`
 `py hkl_py2_py3.py`
 
-change hkl read names in approprite files, eg in kitti_evaluate.py `X_test.hkl` -> `X_test_36.hkl`
+Change hkl read names in approprite files, eg in kitti_evaluate.py `X_test.hkl` -> `X_test_36.hkl`
 
 (ref: https://stackoverflow.com/questions/51413618/loading-hickle-filecomes-from-python2-in-python-3
 https://github.com/telegraphic/hickle)
 
-Install wget and unzip how you can (OS dependent)
-Download data
+
+### Dowload KITTI images
+
+Install wget and unzip how you can (OS dependent), then download training data
 `cd prednet_dir`
 `py process_kitti.py` or faster, `sh download_data.sh` or download directly from https://www.dropbox.com/s/rpwlnn6j39jjme4/kitti_data.zip?dl=0
 
-The file
+Or if using pretrained model, download test data at...
 
-## Test
+## Test Prednet
 
-run the model `py kitti_evaluate.py`
+Run the model: `py kitti_evaluate.py`
+
+
+## Generate FPSI images
+ 
+ `python generate_fpsi_images.py INPUT_FILE [--prefix <prefix>] [--dir <directory>] [--help]'.format(__file__)`
+ 
+## Generate GoL images
+
+...
+ 
+## Tips
+
+### Switch python versions: 
+`> python --version
+Python 3.4.2
+> set PATH=C:\tools\python2\;%PATH%
+> python --version
+Python 2.7.9`
 
 ### GPU setup (Windows)
 
@@ -116,7 +133,7 @@ Check that tensorflow is using gpu: run `py test_gpu.py` from your virtualenv
 
 In case of import tensorflow error, manually remove tensorflow folder in your virtualenv, then uninstall tf and tf-gpu with pip, and reinstall tf-gpu
 
-#### In case of errors, try this
+#### In case of errors...
 
 Tensorflow-gpu should run even if the samples below don't run, but if you manage to run the samples, for sure tensorflow should run
 
@@ -129,6 +146,4 @@ If there are `file not found` errors, make sure that you install cuda *after* in
 If there are SDK errors, right-click the solution in the solution explorer and click `retarget solution`
 The compiled file is built at `C:\ProgramData\NVIDIA Corporation\CUDA Samples\v10.0\bin\win64\Release` , run it and check that there are no errors
 
-## Generate FPSI images
- python generate_fpsi_images.py INPUT_FILE [--prefix <prefix>] [--dir <directory>] [--help]'.format(__file__)
 
