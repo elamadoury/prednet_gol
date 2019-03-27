@@ -11,3 +11,4 @@ deep_learning/.ipynb_checkpoints/predict_next_image_lifegame_ae_for_KITTI-checkp
 prednet/kitti_results/
 prednet/results/
 *.pyc
+predict_next_image_lifegame_ae.ipynb(before RGB)
