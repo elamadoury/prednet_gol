@@ -5,12 +5,12 @@ from tkinter import *
 import cv2
 import hickle as hkl
 
-random.seed(321)
+random.seed(123)
 
 mode = 'normal' # 'normal' or 'glider'
 
 T = 10 #num of steps in each episode
-N = 10 #num of episodes
+N = 100 #num of episodes
 
 # COLS, ROWS = [20, 16]
 COLS, ROWS = [160, 128]
@@ -88,7 +88,7 @@ X = np.array(list(map(lambda x: cv2.cvtColor(x.astype('uint8'), cv2.COLOR_GRAY2R
 X[X == 1] = 255
 
 if mode == 'normal':
-  with open('lifegame_data_test_large.pickle', 'wb') as f:
+  with open('lifegame_data_large.pickle', 'wb') as f:
       pickle.dump(d, f)
   # hkl.dump(X, 'X_test_large.hkl')
   # hkl.dump(sources, 'sources_test_large.hkl')

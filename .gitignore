@@ -10,3 +10,4 @@ deep_learning/fig_for_paper/
 deep_learning/.ipynb_checkpoints/predict_next_image_lifegame_ae_for_KITTI-checkpoint.ipynb
 prednet/kitti_results/
 prednet/results/
+*.pyc
