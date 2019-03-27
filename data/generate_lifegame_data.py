@@ -57,7 +57,6 @@ def game_loop():
 
 
 s_all = list()
-t_all = list()
 epi = 1
 sources = list()
 
@@ -78,10 +77,6 @@ for i in range(N):
 
   game_loop()
 
-d = list()
-d.append(s_all)
-d.append(t_all)
-
 # X = np.array(list(map(lambda x: cv2.cvtColor(x.astype('uint8'), cv2.COLOR_GRAY2RGB).repeat(8, axis=0).repeat(8, axis=1)
 # , s_all)))
 X = np.array(list(map(lambda x: cv2.cvtColor(x.astype('uint8'), cv2.COLOR_GRAY2RGB), s_all)))
@@ -94,11 +89,6 @@ if mode == 'normal':
 if mode == 'glider':
   hkl.dump(X, 'glider_small/X_test.hkl')
   hkl.dump(sources, 'glider_small/sources_test.hkl')
-
-
-
-
-
 
 
 
