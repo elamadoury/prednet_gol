@@ -32,7 +32,7 @@ desired_im_sz = (128, 160)
 # Processes images and saves them in train, val, test splits.
 def process_data():
     #DATA_DIR = args.settings_file
-    im_dir = settings.DATA_DIR + "images/"
+    im_dir = settings.DATA_DIR + "/images/"
     split = "test"
     im_list = []
     source_list = []  # corresponds to recording that image came from
@@ -61,7 +61,8 @@ def process_im(im, desired_sz):
 
 #store images in a reverse order
 def reverse_process_data():
-    im_dir = DATA_DIR + "images/"
+    im_dir = DATA_DIR + "/images/"
+    print("DATA_DIR", DATA_DIR)
     split = "test"
     im_list = []
     source_list = []  # corresponds to recording that image came from

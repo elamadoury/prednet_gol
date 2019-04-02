@@ -17,7 +17,7 @@ from keras.layers import Input, Dense, Flatten
 
 from prednet import PredNet
 from data_utils import SequenceGenerator
-from disney_settings import *
+from datasets_settings import fpsi_settings
 
 
 n_plot = 40

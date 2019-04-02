@@ -20,7 +20,7 @@ from keras.optimizers import Adam
 from prednet import PredNet
 from data_utils import SequenceGenerator
 #file with dataset settings
-from datasets_settings import gol_settings
+from datasets_settings import fpsi_settings
 
 
 save_model = True  # if weights will be saved
