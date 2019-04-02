@@ -168,5 +168,5 @@ The compiled file is built at `C:\ProgramData\NVIDIA Corporation\CUDA Samples\v1
 Take settings file as argument in process...py 
 Take weights files as argument for train.py or use settings file. In any case change it to generic naming.
 Create test and train in process file (use args)
-
+Sort imports.
 

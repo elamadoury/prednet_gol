@@ -1,31 +1,38 @@
 # Create image datasets.
 
-
-import os
-import requests
-from bs4 import BeautifulSoup
-import urllib.request
+import argparse
+import importlib
 import numpy as np
+import os
+import sys
+import requests
+import urllib.request
+import sys
+
+from bs4 import BeautifulSoup
+import hickle as hkl
 from imageio import imread
 from scipy.misc import imresize
-import hickle as hkl
 
 
 usage = 'Usage: python {} SETTINGS_FILE [--help]'.format(__file__)
-parser = argparse.ArgumentParser(description='This script is to generate .hkl files for train and test.',
+parser = argparse.ArgumentParser(description='This script is to generate .hkl files for train and test images',
                                  usage=usage)
 parser.add_argument('settings_file', action='store', nargs=None, 
                     type=str, help='dataset settings file with data path.')
 args = parser.parse_args()
 
-desired_im_sz = (128, 160)
+settings_file = args.settings_file.replace('.py', '').replace('/', '.')
+_, module = settings_file.rsplit('.', 1)
+settings = __import__(settings_file, fromlist="DATA_DIR")
+DATA_DIR = settings.DATA_DIR
 
-from args.settings_file import *
+desired_im_sz = (128, 160)
 
 # Processes images and saves them in train, val, test splits.
 def process_data():
     #DATA_DIR = args.settings_file
-    im_dir = DATA_DIR + "images/"
+    im_dir = settings.DATA_DIR + "images/"
     split = "test"
     im_list = []
     source_list = []  # corresponds to recording that image came from
