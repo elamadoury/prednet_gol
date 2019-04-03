@@ -65,8 +65,6 @@ Install wget and unzip how you can (OS dependent), then download training data
 `cd prednet_dir`
 `py process_kitti.py` or faster, `sh download_data.sh` or download directly from https://www.dropbox.com/s/rpwlnn6j39jjme4/kitti_data.zip?dl=0
 
-Or if using pretrained model, download test data at...
-
 
 ## Generate FPSI images
 
@@ -76,7 +74,7 @@ Download images from https://figshare.com/projects/PredNet_Game_of_Life/60971 or
 
 Process images with
 
-`python images_processing/process_fpsi.py`
+`python images_processing/process.py`
  
 
 ## Generate GoL images
@@ -84,11 +82,19 @@ Process images with
 Same procedure as above.
 
 
-## Test Prednet
+## Run Prednet
+
+### Training
 
 Change data path to appropriate values in prednet/datasets_settings directory.
+If using pretrained model, download weights from ....
 
-Run the model: `py kitti_evaluate.py`
+Or train the model using `py train.py`
+
+
+### Testing
+
+Run the model: `py evaluate.py`
 
 ### hkl pickle error:
 
@@ -109,6 +115,8 @@ Change hkl read names in approprite files, eg in kitti_evaluate.py `X_test.hkl` 
 (ref: https://stackoverflow.com/questions/51413618/loading-hickle-filecomes-from-python2-in-python-3
 https://github.com/telegraphic/hickle)
 
+
+## Run Convnet
 
 
  
@@ -165,8 +173,8 @@ The compiled file is built at `C:\ProgramData\NVIDIA Corporation\CUDA Samples\v1
 
 ## TODO
 
-Take settings file as argument in process...py 
-Take weights files as argument for train.py or use settings file. In any case change it to generic naming.
+Upload corrected hkl files
+Upload all weights files + json file
 Create test and train in process file (use args)
 Sort imports.
 

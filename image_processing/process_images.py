@@ -62,7 +62,6 @@ def process_im(im, desired_sz):
 #store images in a reverse order
 def reverse_process_data():
     im_dir = DATA_DIR + "/images/"
-    print("DATA_DIR", DATA_DIR)
     split = "test"
     im_list = []
     source_list = []  # corresponds to recording that image came from
@@ -81,5 +80,5 @@ def reverse_process_data():
     hkl.dump(source_list, os.path.join(DATA_DIR, 'sources_' + split + '.hkl'))
 
 if __name__ == '__main__':
-    #process_data()
-    reverse_process_data()
+    process_data()
+    #reverse_process_data()
