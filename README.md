@@ -123,11 +123,13 @@ https://github.com/telegraphic/hickle)
 ## Tips
 
 ### Switch python versions: 
-```> python --version
+```
+> python --version
 Python 3.4.2
 > set PATH=C:\tools\python2\;%PATH%
 > python --version
-Python 2.7.9```
+Python 2.7.9
+```
 
 ### GPU setup (Windows)
 
