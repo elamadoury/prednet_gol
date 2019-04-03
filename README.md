@@ -176,7 +176,7 @@ The compiled file is built at `C:\ProgramData\NVIDIA Corporation\CUDA Samples\v1
 ## TODO
 
 Upload corrected hkl files
-Upload all weights files + json file
+Upload structure json file
 Create test and train in process file (use args)
 Sort imports.
 
