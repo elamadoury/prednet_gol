@@ -87,7 +87,7 @@ Same procedure as above.
 ### Training
 
 Change data path to appropriate values in prednet/datasets_settings directory.
-If using pretrained model, download weights from ....
+If using pretrained model, download weights from https://figshare.com/projects/PredNet_Game_of_Life/60971
 
 Or train the model using `py train.py`
 
@@ -98,7 +98,7 @@ Run the model: `py evaluate.py`
 
 ### hkl pickle error:
 
-In case of error while reading weights files, download files from .... or 
+In case of error while reading images in hkl files, download hkl files from https://figshare.com/projects/PredNet_Game_of_Life/60971 or 
 
 Install python2.7 and make a virtual env
 Install old hickle
@@ -123,11 +123,11 @@ https://github.com/telegraphic/hickle)
 ## Tips
 
 ### Switch python versions: 
-`> python --version
+```> python --version
 Python 3.4.2
 > set PATH=C:\tools\python2\;%PATH%
 > python --version
-Python 2.7.9`
+Python 2.7.9```
 
 ### GPU setup (Windows)
 
