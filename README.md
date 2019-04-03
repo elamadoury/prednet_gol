@@ -1,10 +1,14 @@
 # Running Prednet on discrete and continuous datasets
 
 ## Reference for Prednet code
-cloned code at https://github.com/coxlab/prednet
-ref https://coxlab.github.io/prednet/
+Cloned code at https://github.com/coxlab/prednet
+Ref. https://coxlab.github.io/prednet/
 
-## Prednet Installation
+## Overview
+
+Clone this repository, download datasets from ..., modify paths in the `datasets_settings/..._settings.py` files, process images in train/test datasets with `process_images.py`, run prednet with `train.py` or `evaluate.py`.
+
+## Setup for Prednet
 
 ### Install python, pip and virtualenv according to your OS 
 
@@ -54,6 +58,44 @@ Install packages
 `pip install requests bs4 imageio scipy hickle matplotlib opencv-python`
 `pip install numpy==1.16`
 
+
+### Dowload KITTI images
+
+Install wget and unzip how you can (OS dependent), then download training data
+`cd prednet_dir`
+`py process_kitti.py` or faster, `sh download_data.sh` or download directly from https://www.dropbox.com/s/rpwlnn6j39jjme4/kitti_data.zip?dl=0
+
+
+## Generate FPSI images
+
+Download images from https://figshare.com/projects/PredNet_Game_of_Life/60971 or generate images from FPSI video
+ 
+`python generate_fpsi_images.py INPUT_FILE [--prefix <prefix>] [--dir <directory>] [--help]'.format(__file__)`
+
+Process images with
+
+`python images_processing/process.py`
+ 
+
+## Generate GoL images
+
+Same procedure as above.
+
+
+## Run Prednet
+
+### Training
+
+Change data path to appropriate values in prednet/datasets_settings directory.
+If using pretrained model, download weights from ....
+
+Or train the model using `py train.py`
+
+
+### Testing
+
+Run the model: `py evaluate.py`
+
 ### hkl pickle error:
 
 In case of error while reading weights files, download files from .... or 
@@ -74,26 +116,9 @@ Change hkl read names in approprite files, eg in kitti_evaluate.py `X_test.hkl` 
 https://github.com/telegraphic/hickle)
 
 
-### Dowload KITTI images
-
-Install wget and unzip how you can (OS dependent), then download training data
-`cd prednet_dir`
-`py process_kitti.py` or faster, `sh download_data.sh` or download directly from https://www.dropbox.com/s/rpwlnn6j39jjme4/kitti_data.zip?dl=0
-
-Or if using pretrained model, download test data at...
-
-## Test Prednet
-
-Run the model: `py kitti_evaluate.py`
+## Run Convnet
 
 
-## Generate FPSI images
- 
- `python generate_fpsi_images.py INPUT_FILE [--prefix <prefix>] [--dir <directory>] [--help]'.format(__file__)`
- 
-## Generate GoL images
-
-...
  
 ## Tips
 
@@ -146,4 +171,10 @@ If there are `file not found` errors, make sure that you install cuda *after* in
 If there are SDK errors, right-click the solution in the solution explorer and click `retarget solution`
 The compiled file is built at `C:\ProgramData\NVIDIA Corporation\CUDA Samples\v10.0\bin\win64\Release` , run it and check that there are no errors
 
+## TODO
+
+Upload corrected hkl files
+Upload all weights files + json file
+Create test and train in process file (use args)
+Sort imports.
 
