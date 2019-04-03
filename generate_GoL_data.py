@@ -1,5 +1,4 @@
 import numpy as np
-import pickle
 import random 
 from tkinter import *
 import cv2
@@ -9,23 +8,27 @@ random.seed(321)
 
 mode = 'normal' # 'normal' or 'glider'
 
-T = 10 #num of steps in each episode
-N = 10 #num of episodes
+T = 10 #num of steps in each episode_numsode
+N = 10 #num of episode_numsodes
+
+states = list()
+episode_num = 1
+sources = list()
 
 # COLS, ROWS = [20, 16]
 COLS, ROWS = [160, 128]
 
 
 def check(x, y):
-    cnt = 0
-    tbl = [(-1, -1), (0, -1), (1, -1), (1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0)]
-    for t in tbl:
+    count = 0
+    table = [(-1, -1), (0, -1), (1, -1), (1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0)]
+    for t in table:
         xx, yy = [x + t[0], y + t[1]]
         if 0 <= xx < COLS and 0 <= yy < ROWS:
-            if data[yy][xx]: cnt += 1
-    if cnt == 3: return True
+            if data[yy][xx]: count += 1
+    if count == 3: return True
     if data[y][x]:
-        if 2 <= cnt <= 3: return True
+        if 2 <= count <= 3: return True
         return False
     return data[y][x]
 
@@ -43,23 +46,15 @@ def next_turn():
     data = data2
 
 def game_loop():
-    global c, epi
+    global c, episode_num
     while c < T:
-      s_all.append(np.array(data, dtype="int"))
-      sources.append(str(epi))
+      states.append(np.array(data, dtype="int"))
+      sources.append(str(episode_num))
       if c == T - 1:
-        t_all.append(True)
-        epi += 1
-      else:
-        t_all.append(False)
+        episode_num += 1
       next_turn()
       c += 1
 
-
-s_all = list()
-t_all = list()
-epi = 1
-sources = list()
 
 for i in range(N):
   c = 0
@@ -78,31 +73,18 @@ for i in range(N):
 
   game_loop()
 
-d = list()
-d.append(s_all)
-d.append(t_all)
-
 # X = np.array(list(map(lambda x: cv2.cvtColor(x.astype('uint8'), cv2.COLOR_GRAY2RGB).repeat(8, axis=0).repeat(8, axis=1)
-# , s_all)))
-X = np.array(list(map(lambda x: cv2.cvtColor(x.astype('uint8'), cv2.COLOR_GRAY2RGB), s_all)))
+# , states)))
+X = np.array(list(map(lambda x: cv2.cvtColor(x.astype('uint8'), cv2.COLOR_GRAY2RGB), states)))
 X[X == 1] = 255
 
 if mode == 'normal':
-  with open('lifegame_data_test_large.pickle', 'wb') as f:
-      pickle.dump(d, f)
-  # hkl.dump(X, 'X_test_large.hkl')
-  # hkl.dump(sources, 'sources_test_large.hkl')
+  hkl.dump(X, 'data/gol_large/X_test.hkl')
+  hkl.dump(sources, 'data/gol_large/sources_test.hkl')
 
 if mode == 'glider':
-  # with open('lifegame_data_glider.pickle', 'wb') as f:
-      # pickle.dump(d, f)
-  hkl.dump(X, 'X_test.hkl')
-  hkl.dump(sources, 'sources_test.hkl')
-
-
-
-
-
+  hkl.dump(X, 'data/glider_small/X_test.hkl')
+  hkl.dump(sources, 'data/glider_small/sources_test.hkl')
 
 
 
