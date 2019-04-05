@@ -117,7 +117,17 @@ https://github.com/telegraphic/hickle)
 
 
 ## Run Convnet
+Install chainer
+`pip install chainer`
+As chainer has changed a lot since version 1.5, please install chainer more than version 1.5.
 
+All experiments about Convnet are written in jupyter notebooks at 'convnet' directory. So change directory and run jupyter notebook.
+
+`cd convnet`
+`jupyter notebook`
+
+Change data 'PATH' appropriately in second cell of 'predict_next_GoL_image_using_simpleAE.ipynb' and make directly for save results and setting it to 'out' variable.
+After that, only you have to do is run cells from top to bottom.
 
  
 ## Tips
