@@ -17,3 +17,7 @@ prednet/weights_data
 *.pyc
 predict_next_image_lifegame_ae.ipynb(before RGB)
 >>>>>>> master
+hkl_to_image.py
+*.png
+*.model
+*.state
