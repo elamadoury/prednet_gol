@@ -79,7 +79,11 @@ Process images with
 
 ## Generate GoL images
 
-Same procedure as above.
+Download images from https://figshare.com/projects/PredNet_Game_of_Life/60971
+
+Process images with
+
+`python images_processing/process.py`
 
 
 ## Run Prednet
@@ -119,9 +123,9 @@ https://github.com/telegraphic/hickle)
 ## Run Convnet
 Install chainer
 
-`pip install chainer`
+`pip install chainer jupyter`
 
-As chainer has changed a lot since version 1.5, please install chainer more than version 1.5.
+As chainer has changed a lot since version 1.5, please install chainer version > 1.5.
 
 All experiments about Convnet are written in jupyter notebooks at 'convnet' directory. So change directory and run jupyter notebook.
 

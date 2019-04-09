@@ -17,3 +17,4 @@ prednet/weights_data
 *.pyc
 predict_next_image_lifegame_ae.ipynb(before RGB)
 >>>>>>> master
+convnet/results
