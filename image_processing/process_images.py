@@ -48,7 +48,7 @@ def process_data(n_images=-1, order=0):
     for s in range(len(splits)):
         split = splits[s]
         im_list = []
-        #source_list = []  # corresponds to recording that image came from (for kitti)
+        source_list = []  # corresponds to recording that image came from (for kitti)
 
         if order == 0:
             frame_range = range(start,int(start+split_ratio[s]*n_images))
@@ -58,7 +58,7 @@ def process_data(n_images=-1, order=0):
         for i in frame_range: 
             image_name = "frame_" + str(i).zfill(5)  + ".jpg" 
             im_list += [im_dir + image_name]
-            #source_list += [im_dir]
+            source_list += [im_dir]
 
         if order == 0:
             start += int(split_ratio[s]*n_images)
@@ -72,7 +72,7 @@ def process_data(n_images=-1, order=0):
             X[i] = process_im(im, desired_im_sz)
 
         hkl.dump(X, os.path.join(DATA_DIR, 'X_' + split + '.hkl'))
-        #hkl.dump(source_list, os.path.join(DATA_DIR, 'sources_' + split + '.hkl'))
+        hkl.dump(source_list, os.path.join(DATA_DIR, 'sources_' + split + '.hkl'))
 
 # resize and crop image
 def process_im(im, desired_sz):

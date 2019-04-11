@@ -6,13 +6,13 @@ import chainer.links as L
 
 
 class ConvAE_mini(chainer.Chain):
-    def __init__(self, input_size_0, input_size_1, channel_size=3, n_filters=10, n_latent=20, filter_size=3, activation='relu'):
+    def __init__(self, input_shape_0, input_shape_1, channel_size=3, n_filters=10, n_latent=20, filter_size=3, activation='relu'):
         self.activation = {'relu': F.relu, 'sigmoid': F.sigmoid, 'tanh': F.tanh}[activation]
         self.n_filters = n_filters
         self.n_latent = n_latent
         self.filter_size = filter_size
-        self.dim1 = input_size_0 - filter_size + 1
-        self.dim2 = input_size_1 - filter_size + 1
+        self.dim1 = input_shape_0 - filter_size + 1
+        self.dim2 = input_shape_1 - filter_size + 1
         super(ConvAE_mini, self).__init__()
         with self.init_scope():
             # encoder
