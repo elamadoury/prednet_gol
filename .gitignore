@@ -10,14 +10,13 @@ deep_learning/fig_for_paper/
 deep_learning/.ipynb_checkpoints/predict_next_image_lifegame_ae_for_KITTI-checkpoint.ipynb
 prednet/kitti_results/
 prednet/results/
-<<<<<<< HEAD
 datasets
 prednet/weights_data
-=======
 *.pyc
 predict_next_image_lifegame_ae.ipynb(before RGB)
->>>>>>> master
+convnet/results
 hkl_to_image.py
 *.png
 *.model
 *.state
+>>>>>>> master

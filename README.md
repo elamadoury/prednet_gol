@@ -8,7 +8,7 @@ Ref. https://coxlab.github.io/prednet/
 
 Clone this repository, download datasets from ..., modify paths in the `datasets_settings/..._settings.py` files, process images in train/test datasets with `process_images.py`, run prednet with `train.py` or `evaluate.py`.
 
-## Setup for Prednet
+## Setup environment for Prednet
 
 ### Install python, pip and virtualenv according to your OS 
 
@@ -63,7 +63,7 @@ Install packages
 
 Install wget and unzip how you can (OS dependent), then download training data
 `cd prednet_dir`
-`py process_kitti.py` or faster, `sh download_data.sh` or download directly from https://www.dropbox.com/s/rpwlnn6j39jjme4/kitti_data.zip?dl=0
+`py process_kitti.py` or faster, `sh download_data.sh` or download directly from https://figshare.com/projects/PredNet_Game_of_Life/60971
 
 
 ## Generate FPSI images
@@ -74,12 +74,16 @@ Download images from https://figshare.com/projects/PredNet_Game_of_Life/60971 or
 
 Process images with
 
-`python images_processing/process.py`
+`python images_processing/process.py [image directory]`
  
 
 ## Generate GoL images
 
-Same procedure as above.
+Download images from https://figshare.com/projects/PredNet_Game_of_Life/60971
+
+Process images with
+
+`python images_processing/process.py [image directory]`
 
 
 ## Run Prednet
@@ -119,9 +123,9 @@ https://github.com/telegraphic/hickle)
 ## Run Convnet
 Install chainer
 
-`pip install chainer`
+`pip install chainer jupyter`
 
-As chainer has changed a lot since version 1.5, please install chainer more than version 1.5.
+As chainer has changed a lot since version 1.5, please install chainer version > 1.5.
 
 All experiments about Convnet are written in jupyter notebooks at 'convnet' directory. So change directory and run jupyter notebook.
 
