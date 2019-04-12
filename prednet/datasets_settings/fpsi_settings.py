@@ -1,5 +1,5 @@
 # Where data will be saved if you run process_kitti.py
-DATA_DIR = '../datasets/fpsi_data/normal/'#'./kitti_data/'
+DATA_DIR = '../datasets/fpsi/reverse/'#'./kitti_data/'
 
 # Where model weights and config will be saved if you run kitti_train.py
 # If you directly download the trained weights, change to appropriate path.

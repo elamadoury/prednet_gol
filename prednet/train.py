@@ -25,7 +25,7 @@ from datasets_settings import fpsi_settings
 
 save_model = True  # if weights will be saved
 weights_file = os.path.join(WEIGHTS_DIR, 'prednet_gol_weights.hdf5')  # where weights will be saved
-json_file = os.path.join(WEIGHTS_DIR, 'prednet_gol_model.json')
+json_file = 'prednet_gol_model.json'
 
 # Data files
 train_file = os.path.join(DATA_DIR, 'X_train.hkl')
