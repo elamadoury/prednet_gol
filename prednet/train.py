@@ -67,10 +67,35 @@ final_errors = Dense(1, weights=[time_loss_weights, np.zeros(1)], trainable=Fals
 model = Model(inputs=inputs, outputs=final_errors)
 
 # different learning rates for each layer
-# there seems to be 7: layers including one just named "prednet"
-# everything 0 except the 1st Ahat layer
+# layers
+# pred_net_1/layer_a_0/kernel , a_0 to a_2
+# pred_net_1/layer_a_0/bias , a_0 to a_2
+# pred_net_1/layer_ahat_0/kernel, ahat_0 to 3, bias and kernel
+# pred_net_1/layer_c_0/kernel, 0 to 3 bias and kernel
+# pred_net_1/layer_f_0/kernel, same as above
+# pred_net_1/layer_i_0/kernel, same
+# pred_net_1/layer_o_0/kernel, same
+# basic learning rate is 0.00031623512
+
 learning_rate_multipliers = {}
-learning_rate_multipliers['input_1'] = 0.1
+for i in range(0,n_channels+1):
+	if i < 3:
+		layer_name = 'pred_net_1/layer_a_' + str(i) + '/kernel'
+		learning_rate_multipliers[layer_name] = 0
+	layer_name = 'pred_net_1/layer_ahat_' + str(i) + '/kernel'
+	learning_rate_multipliers[layer_name] = 0
+	layer_name = 'pred_net_1/layer_c_' + str(i) + '/kernel'
+	learning_rate_multipliers[layer_name] = 0
+	layer_name = 'pred_net_1/layer_f_' + str(i) + '/kernel'
+	learning_rate_multipliers[layer_name] = 0
+	layer_name = 'pred_net_1/layer_i_' + str(i) + '/kernel'
+	learning_rate_multipliers[layer_name] = 0
+	layer_name = 'pred_net_1/layer_o_' + str(i) + '/kernel'
+	learning_rate_multipliers[layer_name] = 0
+
+del learning_rate_multipliers['pred_net_1/layer_ahat_0/kernel']
+print(learning_rate_multipliers)
+
 adam_with_lr_multipliers = Adam_lr_mult(multipliers=learning_rate_multipliers, debug_verbose=True)
 
 # use this for original prednet with same lr
