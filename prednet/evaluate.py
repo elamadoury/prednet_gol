@@ -17,13 +17,13 @@ from keras.layers import Input, Dense, Flatten
 
 from prednet import PredNet
 from data_utils import SequenceGenerator
-from datasets_settings.fpsi_settings import *
+from datasets_settings.gol_settings import *
 
 
 n_plot = 40
 batch_size = 10
 nt = 10
-WEIGHTS_DIR = './weights_data/'
+# WEIGHTS_DIR = './weights_data/'
 
 if not os.path.exists(WEIGHTS_DIR):
     os.makedirs(WEIGHTS_DIR)

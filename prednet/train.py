@@ -25,7 +25,7 @@ from datasets_settings.gol_settings import *
 
 
 save_model = True  # if weights will be saved
-weights_file = os.path.join(WEIGHTS_DIR, 'prednet_gol_weights.hdf5')  # where weights will be saved
+weights_file = os.path.join(WEIGHTS_DIR, WEIGHTS_FILE)  # where weights will be saved
 json_file = 'prednet_gol_model.json'
 
 # Data files
@@ -82,18 +82,33 @@ for i in range(0,n_channels+1):
 	if i < 3:
 		layer_name = 'pred_net_1/layer_a_' + str(i) + '/kernel'
 		learning_rate_multipliers[layer_name] = 0
+		layer_name = 'pred_net_1/layer_a_' + str(i) + '/bias'
+		learning_rate_multipliers[layer_name] = 0
 	layer_name = 'pred_net_1/layer_ahat_' + str(i) + '/kernel'
+	learning_rate_multipliers[layer_name] = 0
+	layer_name = 'pred_net_1/layer_ahat_' + str(i) + '/bias'
 	learning_rate_multipliers[layer_name] = 0
 	layer_name = 'pred_net_1/layer_c_' + str(i) + '/kernel'
 	learning_rate_multipliers[layer_name] = 0
+	layer_name = 'pred_net_1/layer_c_' + str(i) + '/bias'
+	learning_rate_multipliers[layer_name] = 0
 	layer_name = 'pred_net_1/layer_f_' + str(i) + '/kernel'
+	learning_rate_multipliers[layer_name] = 0
+	layer_name = 'pred_net_1/layer_f_' + str(i) + '/bias'
 	learning_rate_multipliers[layer_name] = 0
 	layer_name = 'pred_net_1/layer_i_' + str(i) + '/kernel'
 	learning_rate_multipliers[layer_name] = 0
+	layer_name = 'pred_net_1/layer_i_' + str(i) + '/bias'
+	learning_rate_multipliers[layer_name] = 0
 	layer_name = 'pred_net_1/layer_o_' + str(i) + '/kernel'
 	learning_rate_multipliers[layer_name] = 0
+	layer_name = 'pred_net_1/layer_o_' + str(i) + '/bias'
+	learning_rate_multipliers[layer_name] = 0
 
+# keep original bias in 1 conv layer
 del learning_rate_multipliers['pred_net_1/layer_ahat_0/kernel']
+del learning_rate_multipliers['pred_net_1/layer_ahat_0/bias']
+
 print(learning_rate_multipliers)
 
 adam_with_lr_multipliers = Adam_lr_mult(multipliers=learning_rate_multipliers, debug_verbose=True)
