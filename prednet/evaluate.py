@@ -31,7 +31,7 @@ if not os.path.exists(RESULTS_SAVE_DIR):
     os.makedirs(RESULTS_SAVE_DIR)
     
 weights_file = os.path.join(WEIGHTS_DIR, WEIGHTS_FILE)
-json_file = 'prednet_model.json'
+json_file =  os.path.join(WEIGHTS_DIR, MODEL_FILE)
 test_sources = os.path.join(DATA_DIR, 'sources_test.hkl')
 test_file = os.path.join(DATA_DIR, 'X_test.hkl')
 

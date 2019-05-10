@@ -9,3 +9,5 @@ WEIGHTS_FILE = 'prednet_gol_weights.hdf5'
 
 # Where results (prediction plots and evaluation file) will be saved.
 RESULTS_SAVE_DIR = './learning_rates_gol_results/'
+
+MODEL_FILE = 'prednet_gol_model.json'
