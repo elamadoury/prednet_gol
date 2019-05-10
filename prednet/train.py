@@ -19,8 +19,9 @@ from keras.optimizers import Adam
 
 from prednet import PredNet
 from data_utils import SequenceGenerator
+from Adam_lr_mult import Adam_lr_mult
 #file with dataset settings
-from datasets_settings import fpsi_settings
+from datasets_settings.gol_settings import *
 
 
 save_model = True  # if weights will be saved
@@ -64,7 +65,18 @@ errors_by_time = TimeDistributed(Dense(1, trainable=False), weights=[layer_loss_
 errors_by_time = Flatten()(errors_by_time)  # will be (batch_size, nt)
 final_errors = Dense(1, weights=[time_loss_weights, np.zeros(1)], trainable=False)(errors_by_time)  # weight errors by time
 model = Model(inputs=inputs, outputs=final_errors)
-model.compile(loss='mean_absolute_error', optimizer='adam')
+
+# different learning rates for each layer
+# there seems to be 7: layers including one just named "prednet"
+# everything 0 except the 1st Ahat layer
+learning_rate_multipliers = {}
+learning_rate_multipliers['input_1'] = 0.1
+adam_with_lr_multipliers = Adam_lr_mult(multipliers=learning_rate_multipliers, debug_verbose=True)
+
+# use this for original prednet with same lr
+# model.compile(loss='mean_absolute_error', optimizer='adam')
+model.compile(loss='mean_absolute_error', optimizer=adam_with_lr_multipliers)
+
 
 train_generator = SequenceGenerator(train_file, train_sources, nt, batch_size=batch_size, shuffle=True)
 val_generator = SequenceGenerator(val_file, val_sources, nt, batch_size=batch_size, N_seq=N_seq_val)
