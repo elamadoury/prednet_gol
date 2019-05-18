@@ -19,7 +19,7 @@ usage = 'Usage: python {} DATA_DIR [N_IMAGES] [ORDER] [--help]'.format(__file__)
 parser = argparse.ArgumentParser(description='This script is to generate .hkl files for train, test and val images',
                                  usage=usage)
 parser.add_argument('data_dir', action='store', nargs=None, 
-                    type=str, help='path to directory containing image folder.')
+                    type=str, help='path to directory containing the image _folder_.')
 parser.add_argument('n_images', action='store', nargs='?', default=-1,
                     type=int, help='optional: total number of images to use.')
 parser.add_argument('order', action='store', nargs='?', default=0,

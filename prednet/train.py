@@ -77,45 +77,45 @@ model = Model(inputs=inputs, outputs=final_errors)
 # pred_net_1/layer_o_0/kernel, same
 # basic learning rate is 0.00031623512
 
-learning_rate_multipliers = {}
-for i in range(0,n_channels+1):
-	if i < 3:
-		layer_name = 'pred_net_1/layer_a_' + str(i) + '/kernel'
-		learning_rate_multipliers[layer_name] = 0
-		layer_name = 'pred_net_1/layer_a_' + str(i) + '/bias'
-		learning_rate_multipliers[layer_name] = 0
-	layer_name = 'pred_net_1/layer_ahat_' + str(i) + '/kernel'
-	learning_rate_multipliers[layer_name] = 0
-	layer_name = 'pred_net_1/layer_ahat_' + str(i) + '/bias'
-	learning_rate_multipliers[layer_name] = 0
-	layer_name = 'pred_net_1/layer_c_' + str(i) + '/kernel'
-	learning_rate_multipliers[layer_name] = 0
-	layer_name = 'pred_net_1/layer_c_' + str(i) + '/bias'
-	learning_rate_multipliers[layer_name] = 0
-	layer_name = 'pred_net_1/layer_f_' + str(i) + '/kernel'
-	learning_rate_multipliers[layer_name] = 0
-	layer_name = 'pred_net_1/layer_f_' + str(i) + '/bias'
-	learning_rate_multipliers[layer_name] = 0
-	layer_name = 'pred_net_1/layer_i_' + str(i) + '/kernel'
-	learning_rate_multipliers[layer_name] = 0
-	layer_name = 'pred_net_1/layer_i_' + str(i) + '/bias'
-	learning_rate_multipliers[layer_name] = 0
-	layer_name = 'pred_net_1/layer_o_' + str(i) + '/kernel'
-	learning_rate_multipliers[layer_name] = 0
-	layer_name = 'pred_net_1/layer_o_' + str(i) + '/bias'
-	learning_rate_multipliers[layer_name] = 0
+# learning_rate_multipliers = {}
+# for i in range(0,n_channels+1):
+# 	if i < 3:
+# 		layer_name = 'pred_net_1/layer_a_' + str(i) + '/kernel'
+# 		learning_rate_multipliers[layer_name] = 0
+# 		layer_name = 'pred_net_1/layer_a_' + str(i) + '/bias'
+# 		learning_rate_multipliers[layer_name] = 0
+# 	layer_name = 'pred_net_1/layer_ahat_' + str(i) + '/kernel'
+# 	learning_rate_multipliers[layer_name] = 0
+# 	layer_name = 'pred_net_1/layer_ahat_' + str(i) + '/bias'
+# 	learning_rate_multipliers[layer_name] = 0
+# 	layer_name = 'pred_net_1/layer_c_' + str(i) + '/kernel'
+# 	learning_rate_multipliers[layer_name] = 0
+# 	layer_name = 'pred_net_1/layer_c_' + str(i) + '/bias'
+# 	learning_rate_multipliers[layer_name] = 0
+# 	layer_name = 'pred_net_1/layer_f_' + str(i) + '/kernel'
+# 	learning_rate_multipliers[layer_name] = 0
+# 	layer_name = 'pred_net_1/layer_f_' + str(i) + '/bias'
+# 	learning_rate_multipliers[layer_name] = 0
+# 	layer_name = 'pred_net_1/layer_i_' + str(i) + '/kernel'
+# 	learning_rate_multipliers[layer_name] = 0
+# 	layer_name = 'pred_net_1/layer_i_' + str(i) + '/bias'
+# 	learning_rate_multipliers[layer_name] = 0
+# 	layer_name = 'pred_net_1/layer_o_' + str(i) + '/kernel'
+# 	learning_rate_multipliers[layer_name] = 0
+# 	layer_name = 'pred_net_1/layer_o_' + str(i) + '/bias'
+# 	learning_rate_multipliers[layer_name] = 0
 
-# keep original bias in 1 conv layer
-del learning_rate_multipliers['pred_net_1/layer_ahat_0/kernel']
-del learning_rate_multipliers['pred_net_1/layer_ahat_0/bias']
+# # keep original bias in 1 conv layer
+# del learning_rate_multipliers['pred_net_1/layer_ahat_0/kernel']
+# del learning_rate_multipliers['pred_net_1/layer_ahat_0/bias']
 
-print(learning_rate_multipliers)
+# print(learning_rate_multipliers)
 
-adam_with_lr_multipliers = Adam_lr_mult(multipliers=learning_rate_multipliers, debug_verbose=True)
+# adam_with_lr_multipliers = Adam_lr_mult(multipliers=learning_rate_multipliers, debug_verbose=True)
 
 # use this for original prednet with same lr
-# model.compile(loss='mean_absolute_error', optimizer='adam')
-model.compile(loss='mean_absolute_error', optimizer=adam_with_lr_multipliers)
+model.compile(loss='mean_absolute_error', optimizer='adam')
+#model.compile(loss='mean_absolute_error', optimizer=adam_with_lr_multipliers)
 
 
 train_generator = SequenceGenerator(train_file, train_sources, nt, batch_size=batch_size, shuffle=True)

@@ -20,3 +20,4 @@ hkl_to_image.py
 *.model
 *.state
 >>>>>>> master
+prednet/learning_rates_gol_results/

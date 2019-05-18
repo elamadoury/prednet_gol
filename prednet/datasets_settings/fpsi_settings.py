@@ -1,8 +1,8 @@
 # Where data will be saved if you run process_kitti.py
-DATA_DIR = '../datasets/fpsi/reverse/'#'./kitti_data/'
+DATA_DIR = '../datasets/fpsi/'#'./kitti_data/'
 
 # name of weights file
-WEIGHTS_FILE = 'prednet_kitti_weights.hdf5'
+WEIGHTS_FILE = 'prednet_weights.hdf5'
 
 # Where model weights and config will be saved if you run kitti_train.py
 # If you directly download the trained weights, change to appropriate path.
