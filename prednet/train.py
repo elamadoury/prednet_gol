@@ -21,13 +21,12 @@ from prednet import PredNet
 from data_utils import SequenceGenerator
 from Adam_lr_mult import Adam_lr_mult
 #file with dataset settings
-from datasets_settings.gol_settings import *
+from datasets_settings.fpsi_settings import *
 
 
 save_model = True  # if weights will be saved
 weights_file = os.path.join(WEIGHTS_DIR, WEIGHTS_FILE)  # where weights will be saved
 json_file =  os.path.join(WEIGHTS_DIR, MODEL_FILE)
-
 # Data files
 train_file = os.path.join(DATA_DIR, 'X_train.hkl')
 train_sources = os.path.join(DATA_DIR, 'sources_train.hkl')
@@ -36,7 +35,7 @@ val_sources = os.path.join(DATA_DIR, 'sources_val.hkl')
 
 # Training parameters
 nb_epoch = 150
-batch_size = 4
+batch_size = 14
 samples_per_epoch = 500
 N_seq_val = 100  # number of sequences to use for validation
 
@@ -54,6 +53,11 @@ nt = 10  # number of timesteps used for sequences in training
 time_loss_weights = 1./ (nt - 1) * np.ones((nt,1))  # equally weight all timesteps except the first
 time_loss_weights[0] = 0
 
+
+if save_model:
+    if not os.path.exists(WEIGHTS_DIR): 
+    	os.makedirs(WEIGHTS_DIR)
+    	print("created ", WEIGHTS_DIR)
 
 prednet = PredNet(stack_sizes, R_stack_sizes,
                   A_filt_sizes, Ahat_filt_sizes, R_filt_sizes,
@@ -124,7 +128,6 @@ val_generator = SequenceGenerator(val_file, val_sources, nt, batch_size=batch_si
 lr_schedule = lambda epoch: 0.001 if epoch < 75 else 0.0001    # start with lr of 0.001 and then drop to 0.0001 after 75 epochs
 callbacks = [LearningRateScheduler(lr_schedule)]
 if save_model:
-    if not os.path.exists(WEIGHTS_DIR): os.mkdir(WEIGHTS_DIR)
     callbacks.append(ModelCheckpoint(filepath=weights_file, monitor='val_loss', save_best_only=True))
 
 history = model.fit_generator(train_generator, samples_per_epoch / batch_size, nb_epoch, callbacks=callbacks,
