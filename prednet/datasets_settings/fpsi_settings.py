@@ -1,5 +1,5 @@
-# Where data will be saved if you run process_kitti.py
-DATA_DIR = 'D:/ShareData/fpsi_data'#'./kitti_data/'
+# path where the image folder will be found 
+DATA_DIR = 'D:/ShareData/fpsi_data' #'./datasets/benham/' # 
 
 # name of weights file
 WEIGHTS_FILE = 'prednet_weights.hdf5'
@@ -9,6 +9,6 @@ WEIGHTS_FILE = 'prednet_weights.hdf5'
 WEIGHTS_DIR = './weights_data/fpsi/'
 
 # Where results (prediction plots and evaluation file) will be saved.
-RESULTS_SAVE_DIR = './results/fpsi/'
+RESULTS_SAVE_DIR = './results/benham/'
 
 MODEL_FILE = 'prednet_model.json'

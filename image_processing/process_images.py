@@ -30,14 +30,14 @@ DATA_DIR = args.data_dir
 desired_im_sz = (128, 160)
 
 #train, val, test
-split_ratio = np.array([0,0,1])
-splits = ["train", "test", "val"]
+split_ratio = np.array([0.8,0.1,0.1])
+splits = ["train", "val", "test"]
 
 # Processes images and saves them in train, val, test splits.
 # Order : 0 for normal, 1 for reverse
 def process_data(n_images=-1, order=0):
     im_dir = DATA_DIR + "/images/"
-    image_list = os.listdir(im_dir)
+    image_list = sorted(os.listdir(im_dir))
     if order == 1:
         image_list.reverse()
 
@@ -53,12 +53,12 @@ def process_data(n_images=-1, order=0):
     i = 0
     for image_name in image_list:
         while limits[s] == 0 :
-            print(limits[s])
             s = s + 1
             if(s>len(limits)) :
                 break
 
         im_list += [im_dir + image_name]
+        # print(image_name)
         source_list += [im_dir]
         i = i + 1
 
