@@ -73,7 +73,7 @@ f.close()
 aspect_ratio = float(X_hat.shape[2]) / X_hat.shape[3]
 plt.figure(figsize = (nt, 2*aspect_ratio))
 gs = gridspec.GridSpec(2, nt)
-gs.update(wspace=0., hspace=0.)
+gs.update(wspace=0.03, hspace=0.03)
 plot_save_dir = os.path.join(RESULTS_SAVE_DIR, 'prediction_plots/')
 if not os.path.exists(plot_save_dir): os.mkdir(plot_save_dir)
 plot_idx = np.random.permutation(X_test.shape[0])[:n_plot]
