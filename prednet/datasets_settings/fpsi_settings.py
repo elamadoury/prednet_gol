@@ -1,5 +1,5 @@
 # path where the image folder will be found 
-DATA_DIR = 'D:/ShareData/fpsi_data' #'./datasets/benham/' # 
+DATA_DIR = './datasets/benham/' # 'D:/ShareData/fpsi_data' #
 
 # name of weights file
 WEIGHTS_FILE = 'prednet_weights.hdf5'
