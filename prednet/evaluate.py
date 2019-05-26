@@ -17,13 +17,19 @@ from keras.layers import Input, Dense, Flatten
 
 from prednet import PredNet
 from data_utils import SequenceGenerator
-from datasets_settings.fpsi_settings import *
+from datasets_settings.gol_settings import *
 
+# original
 
-n_plot = 5
-# number of images before memory wipe
-batch_size = 50
-nt = 50
+n_plot = 40
+batch_size = 10
+nt = 10
+
+#modified
+# n_plot = 5
+# # number of images before memory wipe
+# batch_size = 50
+# nt = 50
 
 if not os.path.exists(WEIGHTS_DIR):
     os.makedirs(WEIGHTS_DIR)
