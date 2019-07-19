@@ -3,6 +3,8 @@ Evaluate trained PredNet on KITTI sequences.
 Calculates mean-squared error and plots predictions.
 '''
 
+# TODO: Predictions are in weird order??
+
 import os
 import numpy as np
 from six.moves import cPickle
@@ -21,8 +23,8 @@ from datasets_settings.gol_settings import *
 
 # original
 
-n_plot = 40
-batch_size = 10
+n_plot = 5
+batch_size = 20
 nt = 10
 
 #modified
