@@ -4,7 +4,6 @@ import argparse
 import importlib
 import numpy as np
 import os
-import sys
 import requests
 import urllib.request
 import sys
