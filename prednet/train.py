@@ -27,6 +27,7 @@ from datasets_settings.gol_settings import *
 save_model = True  # if weights will be saved
 weights_file = os.path.join(WEIGHTS_DIR, WEIGHTS_FILE)  # where weights will be saved
 json_file =  os.path.join(WEIGHTS_DIR, MODEL_FILE)
+
 # Data files
 train_file = os.path.join(DATA_DIR, 'X_train.hkl')
 train_sources = os.path.join(DATA_DIR, 'sources_train.hkl')

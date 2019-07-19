@@ -12,4 +12,3 @@ WEIGHTS_FILE = 'prednet_weights.hdf5'
 RESULTS_SAVE_DIR = './results/single_layer_gol_1000/'
 # RESULTS_SAVE_DIR = './results/gol_prednet_param/'
 
-MODEL_FILE = 'prednet_model.json'

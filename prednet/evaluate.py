@@ -33,6 +33,7 @@ nt = 10
 # batch_size = 50
 # nt = 50
 
+
 if not os.path.exists(WEIGHTS_DIR):
     os.makedirs(WEIGHTS_DIR)
 if not os.path.exists(RESULTS_SAVE_DIR):
