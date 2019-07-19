@@ -3,13 +3,17 @@ import random
 from tkinter import *
 import cv2
 import hickle as hkl
+from PIL import Image
+
+output_path = "D:/ShareData/gol_data/gol_random_images/all/"
 
 random.seed(321)
 
 mode = 'normal' # 'normal' or 'glider'
+save_as_hkl = False
 
 T = 10 #num of steps in each episode_numsode
-N = 10 #num of episode_numsodes
+N = 150 #num of episode_numsodes
 
 states = list()
 episode_num = 1
@@ -55,6 +59,15 @@ def game_loop():
       next_turn()
       c += 1
 
+def save_images(data, output_path):
+
+  i = 0
+  for array in data:
+    image = Image.fromarray(array.astype('uint8'), 'RGB')
+    name = output_path + str(i).zfill(5) + ".png"
+    image.save(name)
+    # print("saved ", name)
+    i = i+1
 
 for i in range(N):
   c = 0
@@ -79,13 +92,18 @@ X = np.array(list(map(lambda x: cv2.cvtColor(x.astype('uint8'), cv2.COLOR_GRAY2R
 X[X == 1] = 255
 
 if mode == 'normal':
-  hkl.dump(X, 'data/gol_large/X_test.hkl')
-  hkl.dump(sources, 'data/gol_large/sources_test.hkl')
+  if save_as_hkl:
+    hkl.dump(X, output_path + 'X_test.hkl')
+    hkl.dump(sources, output_path + 'sources_test.hkl')
+  else:
+    save_images(X, output_path)
 
 if mode == 'glider':
-  hkl.dump(X, 'data/glider_small/X_test.hkl')
-  hkl.dump(sources, 'data/glider_small/sources_test.hkl')
-
+  if save_as_hkl:
+    hkl.dump(X, output_path + 'X_test.hkl')
+    hkl.dump(sources, output_path + 'sources_test.hkl')
+else:
+    save_images(X, output_path)
 
 
 

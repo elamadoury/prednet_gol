@@ -222,9 +222,7 @@ class PredNet(Recurrent):
         r_tm1 = states[:self.nb_layers]
         c_tm1 = states[self.nb_layers:2*self.nb_layers]
         e_tm1 = states[2*self.nb_layers:3*self.nb_layers]
-        #print(r_tm1)
-        #print(e_tm1)
-
+        
         if self.extrap_start_time is not None:
             t = states[-1]
             a = K.switch(t >= self.t_extrap, states[-2], a)  # if past self.extrap_start_time, the previous prediction will be treated as the actual

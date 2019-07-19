@@ -34,26 +34,40 @@ train_sources = os.path.join(DATA_DIR, 'sources_train.hkl')
 val_file = os.path.join(DATA_DIR, 'X_val.hkl')
 val_sources = os.path.join(DATA_DIR, 'sources_val.hkl')
 
+
 # Training parameters
-nb_epoch = 150
-batch_size = 4
-samples_per_epoch = 500
+
+#Training parameters(original)
+nb_epoch = 1000 # 150
+batch_size = 4 #4
+samples_per_epoch = 500 #500
 N_seq_val = 100  # number of sequences to use for validation
+
+# training parameters (copied from simple CNN)
+# nb_epoch =  1000
+# batch_size = 14
+# samples_per_epoch = 100
+# N_seq_val = 100  # number of sequences to use for validation
 
 # Model parameters
 n_channels, im_height, im_width = (3, 128, 160) #16, 20) #128, 160)
 input_shape = (n_channels, im_height, im_width) if K.image_data_format() == 'channels_first' else (im_height, im_width, n_channels)
-stack_sizes = (n_channels, 48, 96, 192)
+stack_sizes = (n_channels,)#, 48, 96, 192)
 R_stack_sizes = stack_sizes
-A_filt_sizes = (3, 3, 3)
-Ahat_filt_sizes = (8, 3, 3, 3)
-R_filt_sizes = (3, 3, 3, 3)
-layer_loss_weights = np.array([1., 0., 0., 0.])  # weighting for each layer in final loss; "L_0" model:  [1, 0, 0, 0], "L_all": [1, 0.1, 0.1, 0.1]
+A_filt_sizes = ()#3,)#, 3, 3)
+Ahat_filt_sizes = (8,)# 3)#, 3, 3)
+R_filt_sizes = (3,)# 3)#, 3, 3)
+layer_loss_weights = np.array([1.])#, 0., 0., 0.])  # weighting for each layer in final loss; "L_0" model:  [1, 0, 0, 0], "L_all": [1, 0.1, 0.1, 0.1]
 layer_loss_weights = np.expand_dims(layer_loss_weights, 1)
 nt = 10  # number of timesteps used for sequences in training
 time_loss_weights = 1./ (nt - 1) * np.ones((nt,1))  # equally weight all timesteps except the first
 time_loss_weights[0] = 0
 
+
+if save_model:
+    if not os.path.exists(WEIGHTS_DIR): 
+    	os.makedirs(WEIGHTS_DIR)
+    	print("created ", WEIGHTS_DIR)
 
 prednet = PredNet(stack_sizes, R_stack_sizes,
                   A_filt_sizes, Ahat_filt_sizes, R_filt_sizes,
@@ -105,15 +119,18 @@ for i in range(0,n_channels+1):
 	layer_name = 'pred_net_1/layer_o_' + str(i) + '/bias'
 	learning_rate_multipliers[layer_name] = 0
 
-# keep original bias in 1 conv layer
+# # keep original bias in 1 conv layer
 del learning_rate_multipliers['pred_net_1/layer_ahat_0/kernel']
 del learning_rate_multipliers['pred_net_1/layer_ahat_0/bias']
 
-print(learning_rate_multipliers)
+# same bias as simple cnn
+learning_rate_multipliers['pred_net_1/layer_ahat_0/kernel'] = 0.001
+learning_rate_multipliers['pred_net_1/layer_ahat_0/bias'] = 0.001
 
+print(learning_rate_multipliers)
 adam_with_lr_multipliers = Adam_lr_mult(multipliers=learning_rate_multipliers, debug_verbose=True)
 
-# use this for original prednet with same lr
+# use this for original prednet
 # model.compile(loss='mean_absolute_error', optimizer='adam')
 model.compile(loss='mean_absolute_error', optimizer=adam_with_lr_multipliers)
 
@@ -124,7 +141,6 @@ val_generator = SequenceGenerator(val_file, val_sources, nt, batch_size=batch_si
 lr_schedule = lambda epoch: 0.001 if epoch < 75 else 0.0001    # start with lr of 0.001 and then drop to 0.0001 after 75 epochs
 callbacks = [LearningRateScheduler(lr_schedule)]
 if save_model:
-    if not os.path.exists(WEIGHTS_DIR): os.mkdir(WEIGHTS_DIR)
     callbacks.append(ModelCheckpoint(filepath=weights_file, monitor='val_loss', save_best_only=True))
 
 history = model.fit_generator(train_generator, samples_per_epoch / batch_size, nb_epoch, callbacks=callbacks,
