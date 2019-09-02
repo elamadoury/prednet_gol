@@ -95,6 +95,9 @@ If using pretrained model, download weights from https://figshare.com/projects/P
 
 Or train the model using `py train.py`
 
+You can specify the number of GPUs on a multi-GPUs server by using the argument `num_gpus`.
+For example, to run prednet with the default parameters on 2 GPUs, you can use `python prednet/kitti_train_original.py --num_gpu=2`. 
+
 
 ### Testing
 
