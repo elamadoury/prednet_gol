@@ -6,6 +6,7 @@ import os
 import numpy as np
 np.random.seed(123)
 from six.moves import cPickle
+import argparse
 
 from keras import backend as K
 from keras.models import Model
@@ -28,7 +29,16 @@ config.gpu_options.allow_growth = True
 sess = tf.Session(config=config)
 set_session(sess)
 
-num_gpus = 4 # number of GPUs
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--num_gpus", type=int, default=1)
+parser.add_argument("--nb_epoch", type=int, default=2)
+parser.add_argument("--batch_size", type=int, default=4)
+parser.add_argument("--samples_per_epoch", type=int, default=500)
+parser.add_argument("--n_seq_val", type=int, default=100)
+args = parser.parse_args()
+
+num_gpus = args.num_gpus # number of GPUs
 
 
 save_model = True  # if weights will be saved
@@ -42,10 +52,10 @@ val_file = os.path.join(DATA_DIR, 'X_val.hkl')
 val_sources = os.path.join(DATA_DIR, 'sources_val.hkl')
 
 # Training parameters
-nb_epoch = 2
-batch_size = 4
-samples_per_epoch = 500
-N_seq_val = 100  # number of sequences to use for validation
+nb_epoch = args.nb_epoch
+batch_size = args.batch_size
+samples_per_epoch = args.samples_per_epoch
+N_seq_val = args.n_seq_val  # number of sequences to use for validation
 
 # Model parameters
 n_channels, im_height, im_width = (3, 128, 160)
@@ -72,7 +82,9 @@ errors_by_time = TimeDistributed(Dense(1, trainable=False), weights=[layer_loss_
 errors_by_time = Flatten()(errors_by_time)  # will be (batch_size, nt)
 final_errors = Dense(1, weights=[time_loss_weights, np.zeros(1)], trainable=False)(errors_by_time)  # weight errors by time
 model = Model(inputs=inputs, outputs=final_errors)
-model = multi_gpu_model(model, gpus=num_gpus) # Distributed model
+
+if num_gpus > 1:
+    model = multi_gpu_model(model, gpus=num_gpus) # Distributed model
 
 model.compile(loss='mean_absolute_error', optimizer='adam')
 
